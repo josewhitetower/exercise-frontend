@@ -29,7 +29,6 @@ export default function NewExerciseForm() {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
           setSuccess(`Exercise added successfully`);
         })
         .catch((e) => {
