@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import NewUserForm from '../components/NewUserForm';
 import NewExerciseForm from '../components/NewExerciseForm';
+import LogsForm from '../components/LogsForm';
 
 export default function Home() {
   return (
@@ -14,6 +15,9 @@ export default function Home() {
         <section className="md:flex border-gray-400 p-2 rounded-sm mt-2 border">
           <NewUserForm />
           <NewExerciseForm />
+        </section>
+        <section className="md:flex border-gray-400 p-2 rounded-sm mt-2 border">
+          <LogsForm />
         </section>
       </main>
     </>
