@@ -1,5 +1,5 @@
 import {useState} from 'react';
-export default function LogsForm() {
+export default function LogsForm({setUserLog}) {
   const [userId, setUserId] = useState('');
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
@@ -31,11 +31,12 @@ export default function LogsForm() {
     })
       .then((res) => {
         if (res.status === 404) {
+          setUserLog(null);
           throw new Error('User not found');
         }
         return res.json();
       })
-      .then((data) => console.table(data.log))
+      .then((data) => setUserLog(data))
       .catch((err) => {
         setError(err.message);
       });
