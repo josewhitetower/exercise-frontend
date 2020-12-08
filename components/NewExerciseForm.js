@@ -77,7 +77,7 @@ export default function NewExerciseForm() {
             </div>
             <div className="flex mt-2 items-center">
                 <label htmlFor="date" className="flex-shrink-0">Date:</label>
-                <input type="text" required id="date" name="date" className="p-1 rounded ml-2 w-full" onChange={handleDateChange} value={date} placeholder="yyyy-mm-dd"/>
+                <input type="text" id="date" name="date" className="p-1 rounded ml-2 w-full" onChange={handleDateChange} value={date} placeholder="yyyy-mm-dd"/>
             </div>
             <button type="submit" className="rounded border border-black py-1 w-full mt-4 hover:bg-gray-800 hover:text-white">Submit</button>
             {error && <p className="text-red-500 text-xs mt-1">{error}</p>}

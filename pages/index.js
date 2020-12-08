@@ -11,10 +11,10 @@ export default function Home() {
       </Head>
       <main className="container mx-auto px-2 mt-8 text-gray-800">
         <h1 className="text-center text-xl font-bold uppercase">Exercise Tracker</h1>
-        <div className="md:flex">
+        <section className="md:flex border-gray-400 p-2 rounded-sm mt-2 border">
           <NewUserForm />
           <NewExerciseForm />
-        </div>
+        </section>
       </main>
     </>
   );
