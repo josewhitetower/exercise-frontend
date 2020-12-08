@@ -61,8 +61,8 @@ export default function NewExerciseForm() {
     }
 
     return(
-        <form className="mt-4 bg-gray-100 p-2 rounded" onSubmit={handleSubmit}>
-            <h3 className="font-semibold">Add Exercises</h3>
+        <form className="mt-4 bg-gray-100 p-2 rounded md:flex-grow md:ml-4" onSubmit={handleSubmit}>
+            <h3 className="font-semibold">Add exercises</h3>
             <div className="flex mt-2 items-center">
                 <label htmlFor="userId" className="flex-shrink-0">User ID*:</label>
                 <input type="text" required id="userId" name="userId" className="p-1 rounded ml-2 w-full" onChange={handleUserIdChange} value={userId}/>

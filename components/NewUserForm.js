@@ -38,7 +38,7 @@ export default function NewUserForm() {
     }
 
     return(
-        <form className="mt-4 bg-gray-100 p-2 rounded" onSubmit={handleSubmit}>
+        <form className="mt-4 bg-gray-100 p-2 rounded md:flex-grow md:justify-between md:self-start" onSubmit={handleSubmit}>
             <h3 className="font-semibold">Create a new user</h3>
             <div className="flex mt-2 items-center">
                 <label htmlFor="username">Username*:</label>
