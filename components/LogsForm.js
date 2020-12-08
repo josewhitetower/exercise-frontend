@@ -7,7 +7,6 @@ export default function LogsForm({setUserLog}) {
   const [error, setError] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({userId, from, to, limit});
     const API_URL =
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:4747/api/exercise/log?'

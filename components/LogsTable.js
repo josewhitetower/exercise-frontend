@@ -10,7 +10,7 @@ export default function LogsTable({user}) {
         </tr>
       </thead>
       <tbody>
-        {user.log.map((log) => {
+        {user.log && user.log.map((log) => {
           return (
             <tr className="border-gray-300 border">
               <td className="border-gray-300 border text-right">{log.description}</td>
