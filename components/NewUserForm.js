@@ -41,7 +41,7 @@ export default function NewUserForm() {
         <form className="mt-4 bg-gray-100 p-2 rounded" onSubmit={handleSubmit}>
             <h3 className="font-semibold">Create a new user</h3>
             <div className="flex mt-2 items-center">
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username">Username*:</label>
                 <input type="text" required id="username" name="username" className="p-1 rounded ml-2 w-full" onChange={handleChange} value={newUserName}/>
             </div>
             <button type="submit" className="rounded border border-black py-1 w-full mt-4 hover:bg-gray-800 hover:text-white">Submit</button>

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import NewUserForm from '../components/NewUserForm'
+import NewExerciseForm from '../components/NewExerciseForm'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <main className="container mx-auto px-2 mt-8 text-gray-800">
         <h1>Exercise Tracker</h1>
         <NewUserForm/>
+        <NewExerciseForm/>
       </main>
     </>
   )
