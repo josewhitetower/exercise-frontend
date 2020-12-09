@@ -26,7 +26,7 @@ export default function Home() {
           {userLog && <LogsTable user={userLog} />}
         </section>
       </main>
-      <footer className="text-center py-4 text-base md:text-2xl">
+      <footer className="text-center py-4 text-base">
         by{' '}
         <a
           href="http://github.com/josewhitetower"
