@@ -57,7 +57,7 @@ export default function NewUserForm() {
       </div>
       <button
         type="submit"
-        className="rounded border border-black py-1 w-full mt-4 hover:bg-gray-800 hover:text-white"
+        className="rounded border border-black py-1 w-full mt-4 hover:bg-gray-800 hover:text-white font-semibold"
       >
         Submit
       </button>

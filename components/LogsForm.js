@@ -120,7 +120,7 @@ export default function LogsForm({setUserLog}) {
       </div>
       <button
         type="submit"
-        className="rounded border border-black py-1 px-2 mt-4 hover:bg-gray-800 hover:text-white"
+        className="rounded border border-black py-1 px-2 mt-4 hover:bg-gray-800 hover:text-white font-semibold"
       >
         Submit
       </button>
