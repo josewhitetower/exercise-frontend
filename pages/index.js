@@ -6,7 +6,7 @@ import LogsForm from '../components/LogsForm';
 import LogsTable from '../components/LogsTable';
 
 export default function Home() {
-  const [userLog, setUserLog] = useState(null)
+  const [userLog, setUserLog] = useState(null);
   return (
     <>
       <Head>
@@ -22,10 +22,19 @@ export default function Home() {
           <NewExerciseForm />
         </section>
         <section className="border-gray-400 p-2 rounded-sm mt-2 border">
-          <LogsForm setUserLog={setUserLog}/>
-          {userLog && <LogsTable user={userLog}/>}
+          <LogsForm setUserLog={setUserLog} />
+          {userLog && <LogsTable user={userLog} />}
         </section>
       </main>
+      <footer className="text-center py-4 text-base md:text-2xl">
+        by{' '}
+        <a
+          href="http://github.com/josewhitetower"
+          className="text-gray-400 hover:text-gray-800"
+        >
+          josewhitetower
+        </a>
+      </footer>
     </>
   );
 }
