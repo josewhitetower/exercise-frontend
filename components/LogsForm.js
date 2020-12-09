@@ -7,10 +7,7 @@ export default function LogsForm({setUserLog}) {
   const [error, setError] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    const API_URL =
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:4747/api/exercise/log?'
-        : '/api/exercise/log?';
+    const API_URL ='https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/log?';
     const params = new URLSearchParams();
     if (userId) {
       params.append('userId', userId);

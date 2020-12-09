@@ -17,10 +17,7 @@ export default function NewExerciseForm() {
     };
     if (data.user_id && data.description && data.duration) {
       // create new Exercise
-      const API_URL =
-        process.env.NODE_ENV === 'development'
-          ? 'http://localhost:4747/api/exercise/add'
-          : '/api/exercise/add';
+      const API_URL ='https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/add';
       fetch(API_URL, {
         method: 'POST',
         body: JSON.stringify(data),
