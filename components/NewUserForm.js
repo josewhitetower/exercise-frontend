@@ -8,7 +8,7 @@ export default function NewUserForm() {
     e.preventDefault();
     if (newUserName) {
       // create new User
-      const API_URL ='https://jt-exercise-tracker-mic.herokuapp.com//api/exercise/new-user';
+      const API_URL ='https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/new-user';
       fetch(API_URL, {
         method: 'POST',
         body: JSON.stringify({username: newUserName}),
