@@ -6,8 +6,10 @@ export default function NewExerciseForm() {
   const [date, setDate] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = (e) => {
+    setIsProcessing(true);
     e.preventDefault();
     const data = {
       user_id: Number(userId),
@@ -17,7 +19,8 @@ export default function NewExerciseForm() {
     };
     if (data.user_id && data.description && data.duration) {
       // create new Exercise
-      const API_URL ='https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/add';
+      const API_URL =
+        'https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/add';
       fetch(API_URL, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -36,6 +39,7 @@ export default function NewExerciseForm() {
           setDescription('');
           setDuration('');
           setDate('');
+          setIsProcessing(false);
         });
     }
   };
@@ -131,7 +135,7 @@ export default function NewExerciseForm() {
         type="submit"
         className="rounded border border-gray-300 py-1 w-full mt-4 hover:bg-gray-800 hover:text-white font-semibold"
       >
-        Submit
+        {isProcessing ? 'Processing...' : 'Submit'}
       </button>
       {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
       {success && <p className="text-green-500 text-xs mt-1">{success}</p>}

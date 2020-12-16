@@ -3,12 +3,15 @@ export default function NewUserForm() {
   const [newUserName, setNewUserName] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = (e) => {
+    setIsProcessing(true);
     e.preventDefault();
     if (newUserName) {
       // create new User
-      const API_URL ='https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/new-user';
+      const API_URL =
+        'https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/new-user';
       fetch(API_URL, {
         method: 'POST',
         body: JSON.stringify({username: newUserName}),
@@ -27,6 +30,7 @@ export default function NewUserForm() {
         })
         .finally(() => {
           setNewUserName('');
+          setIsProcessing(false);
         });
     }
   };
@@ -59,7 +63,7 @@ export default function NewUserForm() {
         type="submit"
         className="rounded border border-gray-300 py-1 w-full mt-4 hover:bg-gray-800 hover:text-white font-semibold"
       >
-        Submit
+        {isProcessing ? 'Processing...' : 'Submit'}
       </button>
       {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
       {success && <p className="text-green-500 text-xs mt-1">{success}</p>}

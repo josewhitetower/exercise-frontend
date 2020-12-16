@@ -5,7 +5,10 @@ export default function LogsForm({setUserLog}) {
   const [to, setTo] = useState('');
   const [limit, setLimit] = useState('');
   const [error, setError] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+
   const handleSubmit = (e) => {
+    setIsProcessing(true);
     e.preventDefault();
     const API_URL ='https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/log?';
     const params = new URLSearchParams();
@@ -35,6 +38,9 @@ export default function LogsForm({setUserLog}) {
       .then((data) => setUserLog(data))
       .catch((err) => {
         setError(err.message);
+      })
+      .finally(() => {
+        setIsProcessing(false);
       });
   };
 
@@ -122,7 +128,7 @@ export default function LogsForm({setUserLog}) {
         type="submit"
         className="rounded border border-gray-300 py-1 px-2 mt-4 hover:bg-gray-800 hover:text-white font-semibold"
       >
-        Submit
+        {isProcessing ? 'Processing...' : 'Submit'}
       </button>
       {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </form>
