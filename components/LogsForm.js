@@ -7,41 +7,42 @@ export default function LogsForm({setUserLog}) {
   const [error, setError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmit = (e) => {
-    setIsProcessing(true);
-    e.preventDefault();
-    const API_URL ='https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/log?';
-    const params = new URLSearchParams();
-    if (userId) {
-      params.append('userId', userId);
-    }
-    if (from) {
-      params.append('from', from);
-    }
-    if (to) {
-      params.append('to', to);
-    }
-    if (limit) {
-      params.append('limit', limit);
-    }
+  const handleSubmit = async (e) => {
+    try {
+      setIsProcessing(true);
+      e.preventDefault();
+      const API_URL =
+        'https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/log?';
+      const params = new URLSearchParams();
+      if (userId) {
+        params.append('userId', userId);
+      }
+      if (from) {
+        params.append('from', from);
+      }
+      if (to) {
+        params.append('to', to);
+      }
+      if (limit) {
+        params.append('limit', limit);
+      }
 
-    fetch(API_URL + params.toString(), {
-      mode: 'cors',
-    })
-      .then((res) => {
-        if (res.status === 404) {
-          setUserLog(null);
-          throw new Error('User not found');
-        }
-        return res.json();
-      })
-      .then((data) => setUserLog(data))
-      .catch((err) => {
-        setError(err.message);
-      })
-      .finally(() => {
-        setIsProcessing(false);
+      const res = await fetch(API_URL + params.toString(), {
+        mode: 'cors',
       });
+
+      if (res.status === 404) {
+        setUserLog(null);
+        throw new Error('User not found');
+      }
+
+      const data = await res.json();
+      setUserLog(data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleUserIdChange = (e) => {

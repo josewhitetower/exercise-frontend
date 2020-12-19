@@ -5,33 +5,31 @@ export default function NewUserForm() {
   const [success, setSuccess] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmit = (e) => {
-    setIsProcessing(true);
-    e.preventDefault();
-    if (newUserName) {
-      // create new User
-      const API_URL =
-        'https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/new-user';
-      fetch(API_URL, {
-        method: 'POST',
-        body: JSON.stringify({username: newUserName}),
-      })
-        .then((res) => {
-          if (res.status === 409) {
-            throw new Error('Username is already taken');
-          }
-          return res.json();
-        })
-        .then((data) => {
-          setSuccess(`User added successfully, ID: ${data._id}`);
-        })
-        .catch((e) => {
-          setError(e.message);
-        })
-        .finally(() => {
-          setNewUserName('');
-          setIsProcessing(false);
+  const handleSubmit = async (e) => {
+    try {
+      setIsProcessing(true);
+      e.preventDefault();
+      if (newUserName) {
+        // create new User
+        const API_URL =
+          'https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/new-user';
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({username: newUserName}),
         });
+
+        if (res.status === 409) {
+          throw new Error('Username is already taken');
+        }
+
+        const data = await res.json();
+        setSuccess(`User added successfully, ID: ${data._id}`);
+      }
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setNewUserName('');
+      setIsProcessing(false);
     }
   };
 

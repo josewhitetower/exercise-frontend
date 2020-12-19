@@ -12,7 +12,7 @@ export default function LogsTable({user}) {
       <tbody>
         {user.log && user.log.map((log) => {
           return (
-            <tr className="border-gray-300 border">
+            <tr className="border-gray-300 border" key={log.date}>
               <td className="border-gray-300 border text-right">{log.description}</td>
               <td className="border-gray-300 border text-right">{log.duration}</td>
               <td className="border-gray-300 border text-right">{new Date(log.date).toDateString()}</td>

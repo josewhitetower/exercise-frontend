@@ -8,39 +8,35 @@ export default function NewExerciseForm() {
   const [success, setSuccess] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmit = (e) => {
-    setIsProcessing(true);
-    e.preventDefault();
-    const data = {
-      user_id: Number(userId),
-      description,
-      duration: Number(duration),
-      date,
-    };
-    if (data.user_id && data.description && data.duration) {
-      // create new Exercise
-      const API_URL =
-        'https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/add';
-      fetch(API_URL, {
-        method: 'POST',
-        body: JSON.stringify(data),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          setSuccess(`Exercise added successfully`);
-        })
-        .catch((e) => {
-          setError('Internal Error');
-        })
-        .finally(() => {
-          setUserId('');
-          setDescription('');
-          setDuration('');
-          setDate('');
-          setIsProcessing(false);
+  const handleSubmit = async (e) => {
+    try {
+      setIsProcessing(true);
+      e.preventDefault();
+      const data = {
+        user_id: Number(userId),
+        description,
+        duration: Number(duration),
+        date,
+      };
+      if (data.user_id && data.description && data.duration) {
+        // create new Exercise
+        const API_URL =
+          'http://localhost:4747/api/exercise/add';
+        await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify(data),
         });
+        setSuccess(`Exercise added successfully`);
+      }
+
+    } catch (error) {
+      setError('Internal Error');
+    } finally {
+      setUserId('');
+      setDescription('');
+      setDuration('');
+      setDate('');
+      setIsProcessing(false);
     }
   };
 
