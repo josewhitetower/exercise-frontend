@@ -21,7 +21,7 @@ export default function NewExerciseForm() {
       if (data.user_id && data.description && data.duration) {
         // create new Exercise
         const API_URL =
-          'http://localhost:4747/api/exercise/add';
+          'https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/add';
         await fetch(API_URL, {
           method: 'POST',
           body: JSON.stringify(data),
