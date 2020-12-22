@@ -66,11 +66,11 @@ export default function LogsForm({setUserLog}) {
   };
 
   return (
-    <form className="mt-4 bg-gray-100 p-2 rounded" onSubmit={handleSubmit}>
-      <h3 className="font-semibold">Log user's exercises</h3>
+    <form className="mt-4 p-2 flex flex-col" onSubmit={handleSubmit}>
+      <h3 className="font-semibold text-white">Log user's exercises</h3>
       <div className="flex flex-wrap">
         <div className="flex mt-2 items-center flex-grow mr-2">
-          <label htmlFor="userId" className="flex-shrink-0">
+          <label htmlFor="userId" className="flex-shrink-0 text-gray-300">
             User ID*:
           </label>
           <input
@@ -78,48 +78,48 @@ export default function LogsForm({setUserLog}) {
             required
             id="userId"
             name="userId"
-            className="p-1 rounded ml-2 w-full"
+            className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
             onChange={handleUserIdChange}
             value={userId}
           />
         </div>
         <div className="flex mt-2 items-center flex-grow mr-2">
-          <label htmlFor="from" className="flex-shrink-0">
+          <label htmlFor="from" className="flex-shrink-0 text-gray-300">
             From:
           </label>
           <input
             type="text"
             id="from"
             name="from"
-            className="p-1 rounded ml-2 w-full"
+            className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
             onChange={handleFromChange}
             value={from}
             placeholder="yyyy-mm-dd"
           />
         </div>
         <div className="flex mt-2 items-center flex-grow mr-2">
-          <label htmlFor="to" className="flex-shrink-0">
+          <label htmlFor="to" className="flex-shrink-0 text-gray-300">
             To:
           </label>
           <input
             type="text"
             id="to"
             name="to"
-            className="p-1 rounded ml-2 w-full"
+            className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
             onChange={handleToChange}
             value={to}
             placeholder="yyyy-mm-dd"
           />
         </div>
         <div className="flex mt-2 items-center flex-grow mr-2">
-          <label htmlFor="limit" className="flex-shrink-0">
+          <label htmlFor="limit" className="flex-shrink-0 text-gray-300">
             Limit:
           </label>
           <input
             type="number"
             id="limit"
             name="date"
-            className="p-1 rounded ml-2 w-full"
+            className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
             onChange={handleLimitChange}
             value={limit}
           />
@@ -127,7 +127,7 @@ export default function LogsForm({setUserLog}) {
       </div>
       <button
         type="submit"
-        className="rounded border border-gray-300 py-1 px-2 mt-4 hover:bg-gray-800 hover:text-white font-semibold"
+        className="rounded-2xl py-2 px-4 mt-6 bg-green-500 text-white font-semibold self-end hover:bg-green-400"
       >
         {isProcessing ? 'Processing...' : 'Submit'}
       </button>
