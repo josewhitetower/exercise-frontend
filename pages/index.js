@@ -13,15 +13,15 @@ export default function Home() {
         <title>Exercise Tracker</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container mx-auto px-2 mt-8 text-gray-800">
-        <h1 className="text-center text-xl font-bold uppercase">
+      <main className="container mx-auto mt-8 text-gray-800 bg-indigo-900 p-6 rounded-2xl">
+        <h1 className="text-xl font-bold text-white mb-6">
           Exercise Tracker
         </h1>
-        <section className="md:flex border-gray-400 p-2 rounded-sm mt-2 border">
+        <section className="md:flex border-indigo-800 p-2 rounded-sm mt-2 border-t">
           <NewUserForm />
           <NewExerciseForm />
         </section>
-        <section className="border-gray-400 p-2 rounded-sm mt-2 border">
+        <section className="border-indigo-800 p-2 rounded-sm mt-2 border-t">
           <LogsForm setUserLog={setUserLog} />
           {userLog && <LogsTable user={userLog} />}
         </section>

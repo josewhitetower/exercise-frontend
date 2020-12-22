@@ -41,25 +41,25 @@ export default function NewUserForm() {
 
   return (
     <form
-      className="mt-4 bg-gray-100 p-2 rounded md:flex-grow md:justify-between md:self-start"
+      className="mt-4 p-2 rounded md:flex-grow md:justify-between md:self-start flex flex-col"
       onSubmit={handleSubmit}
     >
-      <h3 className="font-semibold">Create a new user</h3>
+      <h3 className="font-semibold text-white">Create a new user</h3>
       <div className="flex mt-2 items-center">
-        <label htmlFor="username">Username*:</label>
+        <label htmlFor="username" className="text-gray-300">Username*:</label>
         <input
           type="text"
           required
           id="username"
           name="username"
-          className="p-1 rounded ml-2 w-full"
+          className="p-2 ml-2 w-full bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
           onChange={handleChange}
           value={newUserName}
         />
       </div>
       <button
         type="submit"
-        className="rounded border border-gray-300 py-1 w-full mt-4 hover:bg-gray-800 hover:text-white font-semibold"
+        className="rounded-2xl py-2 px-4 mt-6 bg-green-500 text-white font-semibold self-end hover:bg-green-400"
       >
         {isProcessing ? 'Processing...' : 'Submit'}
       </button>
