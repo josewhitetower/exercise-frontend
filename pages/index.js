@@ -13,8 +13,8 @@ export default function Home() {
         <title>Exercise Tracker</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container mx-auto mt-8 text-gray-800 bg-indigo-900 p-6 rounded-2xl">
-        <h1 className="text-xl font-bold text-white mb-6">
+      <main className="container mx-auto mt-8 text-gray-800 bg-indigo-900 md:p-6 rounded-2xl">
+        <h1 className="text-xl font-bold text-white mb-6 p-4">
           Exercise Tracker
         </h1>
         <section className="md:flex border-indigo-800 p-2 rounded-sm mt-2 border-t">
