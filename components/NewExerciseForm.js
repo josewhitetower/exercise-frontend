@@ -66,12 +66,12 @@ export default function NewExerciseForm() {
 
   return (
     <form
-      className="mt-4 bg-gray-100 p-2 rounded md:flex-grow md:ml-4"
+      className="mt-4 p-2 md:flex-grow md:ml-4 flex flex-col"
       onSubmit={handleSubmit}
     >
-      <h3 className="font-semibold">Add exercises</h3>
+      <h3 className="font-semibold text-white">Add exercises</h3>
       <div className="flex mt-2 items-center">
-        <label htmlFor="userId" className="flex-shrink-0">
+        <label htmlFor="userId" className="flex-shrink-0 text-gray-300">
           User ID*:
         </label>
         <input
@@ -79,13 +79,13 @@ export default function NewExerciseForm() {
           required
           id="userId"
           name="userId"
-          className="p-1 rounded ml-2 w-full"
+          className="p-2 ml-2 w-full bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
           onChange={handleUserIdChange}
           value={userId}
         />
       </div>
       <div className="flex mt-2 items-center">
-        <label htmlFor="description" className="flex-shrink-0">
+        <label htmlFor="description" className="flex-shrink-0 text-gray-300">
           Description*:
         </label>
         <input
@@ -93,13 +93,13 @@ export default function NewExerciseForm() {
           required
           id="description"
           name="description"
-          className="p-1 rounded ml-2 w-full"
+          className="p-2 ml-2 w-full bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
           onChange={handleDescriptionChange}
           value={description}
         />
       </div>
       <div className="flex mt-2 items-center">
-        <label htmlFor="duration" className="flex-shrink-0">
+        <label htmlFor="duration" className="flex-shrink-0 text-gray-300">
           Duration*:
         </label>
         <input
@@ -107,21 +107,21 @@ export default function NewExerciseForm() {
           required
           id="duration"
           name="duration"
-          className="p-1 rounded ml-2 w-full"
+          className="p-2 ml-2 w-full bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
           onChange={handleDurationChange}
           value={duration}
           placeholder="mins"
         />
       </div>
       <div className="flex mt-2 items-center">
-        <label htmlFor="date" className="flex-shrink-0">
+        <label htmlFor="date" className="flex-shrink-0 text-gray-300">
           Date:
         </label>
         <input
           type="text"
           id="date"
           name="date"
-          className="p-1 rounded ml-2 w-full"
+          className="p-2 ml-2 w-full bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
           onChange={handleDateChange}
           value={date}
           placeholder="yyyy-mm-dd"
@@ -129,7 +129,7 @@ export default function NewExerciseForm() {
       </div>
       <button
         type="submit"
-        className="rounded border border-gray-300 py-1 w-full mt-4 hover:bg-gray-800 hover:text-white font-semibold"
+        className="rounded-2xl py-2 px-4 mt-6 bg-green-500 text-white font-semibold self-end hover:bg-green-400"
       >
         {isProcessing ? 'Processing...' : 'Submit'}
       </button>
