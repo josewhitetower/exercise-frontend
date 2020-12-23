@@ -40,7 +40,7 @@ export default function LogsTable({user}) {
                 />
                 <EditableCell
                   isEditing={log._id === editableRow}
-                  value={log.date}
+                  value={log.date.split('T')[0]} // from 2020-12-08T13:17:54Z to 2020-12-08
                 />
                 <ActionsCell
                   onEdit={onEdit}
