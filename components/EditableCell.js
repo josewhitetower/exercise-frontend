@@ -5,6 +5,7 @@ export default function EditableCell({isEditing, value}) {
         isEditing ? 'text-white bg-green-500 cursor-text' : 'border-gray-300'
       }`}
       contentEditable={isEditing}
+      tabIndex={0}
       suppressContentEditableWarning={true} // https://stackoverflow.com/a/49639256
     >
       {value}
