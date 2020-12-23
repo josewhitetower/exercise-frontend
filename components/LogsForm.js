@@ -42,6 +42,7 @@ export default function LogsForm({setUserLog}) {
       setError(error.message);
     } finally {
       setIsProcessing(false);
+      setError('')
     }
   };
 

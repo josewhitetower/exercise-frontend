@@ -1,11 +1,13 @@
 export default function EditableCell({isEditing, value}) {
-  return !isEditing ? (
-    <td className="border-gray-300 border p-1">{value}</td>
-  ) : (
-    <input
-      type="text"
-      className="text-indigo-900"
-      defaultValue={value}
-    />
+  return (
+    <td
+      className={` border p-1 ${
+        isEditing ? 'text-white bg-green-500 cursor-text' : 'border-gray-300'
+      }`}
+      contentEditable={isEditing}
+      suppressContentEditableWarning={true} // https://stackoverflow.com/a/49639256
+    >
+      {value}
+    </td>
   );
 }
