@@ -1,3 +1,5 @@
+import EditableCell from './EditableCell'
+import ActionsCell from './ActionsCell'
 export default function LogsTable({user}) {
   return (
     <table className="w-full mt-4">
@@ -7,15 +9,17 @@ export default function LogsTable({user}) {
           <th className="p-1">Description</th>
           <th className="p-1">Duration</th>
           <th className="p-1">Date</th>
+          <th className="p-1">Actions</th>
         </tr>
       </thead>
       <tbody>
         {user.log && user.log.map((log) => {
           return (
-            <tr className="border-gray-300 border text-white" key={log.date}>
-              <td className="border-gray-300 border text-right p-1">{log.description}</td>
-              <td className="border-gray-300 border text-right p-1">{log.duration}</td>
-              <td className="border-gray-300 border text-right p-1">{new Date(log.date).toDateString()}</td>
+            <tr className="border-gray-300 border text-white" key={log._id}>
+              <EditableCell isEditing={false} value={log.description}/>
+              <EditableCell isEditing={false} value={log.duration}/>
+              <EditableCell isEditing={false} value={log.date}/>
+              <ActionsCell/>
             </tr>
           );
         })}
