@@ -3,12 +3,69 @@ import EditableCell from './EditableCell';
 import ActionsCell from './ActionsCell';
 export default function LogsTable({user}) {
   const [editableRow, setEditableRow] = useState(null);
+  const [description, setDescription] = useState('');
+  const [duration, setDuration] = useState('');
+  const [date, setDate] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const onEdit = (id, value) => {
+  const onChange = (field, value) => {
+    switch (field) {
+      case 'description':
+        setDescription(value);
+        break;
+      case 'duration':
+        setDuration(value);
+        break;
+      case 'date':
+        setDate(value);
+        break;
+    }
+  };
+
+  const onEdit = (log, value) => {
+    let updatedRow;
     if (value) {
-      setEditableRow(id);
+      setEditableRow(log._id);
     } else {
+      if (description) {
+        updatedRow = {...log, description};
+      }
+      if (date) {
+        updatedRow = {...log, date};
+      }
+      if (duration) {
+        updatedRow = {...log, duration};
+      }
+      setDescription('');
+      setDate('');
+      setDuration('');
+      updateRow(updatedRow);
+    }
+  };
+
+  const updateRow = async (row) => {
+    try {
+      setIsProcessing(true);
+      const myHeaders = new Headers();
+      myHeaders.append('Content-Type', 'application/json');
+      myHeaders.append('Access-Control-Allow-Origin', '*');
+
+      const data = {
+        _id: Number(row._id),
+        description: row.description,
+        duration: Number(row.duration),
+        date: row.date,
+      };
+      // create new Exercise
+      await fetch(API_URL, {
+        method: 'POST', // it should be PUT though
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      setIsProcessing(false);
+    } finally {
       setEditableRow(null);
+      setIsProcessing(false);
     }
 
   };
@@ -29,22 +86,33 @@ export default function LogsTable({user}) {
         {user.log &&
           user.log.map((log) => {
             return (
-              <tr className="border-gray-300 border text-white" key={log._id}>
+              <tr
+                className={`border-gray-300 border text-white ${
+                  log._id === editableRow && isProcessing ? 'animate-pulse' : ''
+                }`}
+                key={log._id}
+              >
                 <EditableCell
                   isEditing={log._id === editableRow}
+                  onChange={onChange}
                   value={log.description}
+                  field="description"
                 />
                 <EditableCell
                   isEditing={log._id === editableRow}
+                  onChange={onChange}
                   value={log.duration}
+                  field="duration"
                 />
                 <EditableCell
                   isEditing={log._id === editableRow}
+                  onChange={onChange}
                   value={log.date.split('T')[0]} // from 2020-12-08T13:17:54Z to 2020-12-08
+                  field="date"
                 />
                 <ActionsCell
                   onEdit={onEdit}
-                  id={log._id}
+                  log={log}
                   isEditing={log._id === editableRow}
                 />
               </tr>

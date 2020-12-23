@@ -1,11 +1,11 @@
-export default function ActionsCell({onEdit, id, isEditing}) {
+export default function ActionsCell({onEdit, log, isEditing}) {
   const handleClick = () => {
-    onEdit(id, !isEditing);
+    onEdit(log, !isEditing);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      onEdit(id, !isEditing);
+      onEdit(log, !isEditing);
     }
   };
   return (
