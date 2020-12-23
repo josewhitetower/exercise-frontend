@@ -128,7 +128,7 @@ export default function LogsForm({setUserLog}) {
       </div>
       <button
         type="submit"
-        className="rounded-2xl py-2 px-4 mt-6 bg-green-500 text-white font-semibold self-end hover:bg-green-400"
+        className="rounded-full py-2 px-4 mt-6 bg-green-500 text-white font-semibold self-end hover:bg-green-400"
       >
         {isProcessing ? 'Processing...' : 'Submit'}
       </button>

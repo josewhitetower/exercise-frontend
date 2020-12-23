@@ -14,7 +14,7 @@ export default function LogsTable({user}) {
   };
   return (
     <table className="w-full mt-4 border-collapse">
-      <caption className="mb-2 font-semibold text-white mb-6">
+      <caption className="font-semibold text-white mb-6">
         {user.username}'s Logs
       </caption>
       <thead>
