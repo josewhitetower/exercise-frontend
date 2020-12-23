@@ -25,7 +25,9 @@ export default function LogsTable({user}) {
   const onEdit = (log, value) => {
     let updatedRow;
     if (value) {
-      setEditableRow(log._id);
+      if (!editableRow) {
+        setEditableRow(log._id);
+      }
     } else {
       if (description) {
         updatedRow = {...log, description};
