@@ -1,14 +1,15 @@
 import {useState} from 'react';
 import Calendar from 'react-calendar';
-import formattedDate from '../lib/formattedDate'
+import formattedDate from '../lib/formattedDate';
 export default function LogsForm({setUserLog}) {
   const [userId, setUserId] = useState('');
-  const [from, setFrom] = useState(new Date());
-  const [to, setTo] = useState(new Date());
+  const [from, setFrom] = useState(null);
+  const [to, setTo] = useState(null);
   const [limit, setLimit] = useState('');
   const [error, setError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [showFromCalendar, setShowFromCalendar] = useState(false);
+  const [showToCalendar, setShowToCalendar] = useState(false);
 
   const handleSubmit = async (e) => {
     try {
@@ -59,15 +60,25 @@ export default function LogsForm({setUserLog}) {
     }
   };
 
+  const clearFrom = () => {
+    setFrom(null);
+    setShowFromCalendar(false)
+  }
+  const clearTo = () => {
+    setTo(null);
+    setShowToCalendar(false)
+  }
+
   const handleFromChange = (value) => {
     error && setError('');
     setFrom(value);
-    setShowCalendar(false);
+    setShowFromCalendar(false);
   };
 
-  const handleToChange = (e) => {
+  const handleToChange = (value) => {
     error && setError('');
-    setTo(e.target.value);
+    setTo(value);
+    setShowToCalendar(false);
   };
 
   const handleLimitChange = (e) => {
@@ -98,6 +109,7 @@ export default function LogsForm({setUserLog}) {
             From:
           </label>
           <div className="relative">
+            {from && <span className="absolute right-0 text-white top-2 cursor-pointer" onClick={clearFrom}>x</span>}
             <input
               type="text"
               id="from"
@@ -105,11 +117,11 @@ export default function LogsForm({setUserLog}) {
               className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
               autoComplete="off"
               readOnly={true}
-              onFocus={() => setShowCalendar(true)}
+              onFocus={() => setShowFromCalendar(true)}
               value={formattedDate(from)}
               placeholder="yyyy-mm-dd"
             />
-            {showCalendar && (
+            {showFromCalendar && (
               <Calendar
                 className={`absolute ml-2 bg-green-500 rounded p-1 text-white`}
                 value={from}
@@ -123,15 +135,28 @@ export default function LogsForm({setUserLog}) {
           <label htmlFor="to" className="flex-shrink-0 text-gray-300">
             To:
           </label>
-          <input
-            type="text"
-            id="to"
-            name="to"
-            className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
-            onChange={handleToChange}
-            value={to}
-            placeholder="yyyy-mm-dd"
-          />
+          <div className="relative">
+          {to && <span className="absolute right-0 text-white top-2 cursor-pointer" onClick={clearTo}>x</span>}
+            <input
+              type="text"
+              id="to"
+              name="to"
+              className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
+              autoComplete="off"
+              readOnly={true}
+              onFocus={() => setShowToCalendar(true)}
+              value={formattedDate(to)}
+              placeholder="yyyy-mm-dd"
+            />
+            {showToCalendar && (
+              <Calendar
+                className={`absolute ml-2 bg-green-500 rounded p-1 text-white`}
+                value={to}
+                onChange={handleToChange}
+                tileClassName={(tile) => handleTileClassName(tile, to)}
+              />
+            )}
+          </div>
         </div>
         <div className="flex mt-2 items-center flex-grow mr-2">
           <label htmlFor="limit" className="flex-shrink-0 text-gray-300">

@@ -19,7 +19,7 @@ export default function NewExerciseForm() {
         user_id: Number(userId),
         description,
         duration: Number(duration),
-        date: date.toISOString().slice(0, 10),
+        date: formattedDate(date),
       };
       if (data.user_id && data.description && data.duration) {
         // create new Exercise
