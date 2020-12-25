@@ -57,14 +57,15 @@ export default function LogsTable({user}) {
         date: row.date,
       };
       // create new Exercise
-      const API_URL = 'http://localhost:4747/api/exercise/edit';
+      const API_URL =
+        'https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/edit';
       const res = await fetch(API_URL, {
         method: 'POST', // it should be PUT though
         body: JSON.stringify(data),
       });
       if (!res.ok) {
         console.log(res);
-        throw new Error(res.statusText)
+        throw new Error(res.statusText);
       }
     } catch (error) {
       setIsProcessing(false);

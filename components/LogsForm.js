@@ -15,7 +15,8 @@ export default function LogsForm({setUserLog}) {
     try {
       setIsProcessing(true);
       e.preventDefault();
-      const API_URL = 'http://localhost:4747/api/exercise/log?';
+      const API_URL =
+        'https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/log?';
       const params = new URLSearchParams();
       if (userId) {
         params.append('userId', userId);
@@ -62,12 +63,12 @@ export default function LogsForm({setUserLog}) {
 
   const clearFrom = () => {
     setFrom(null);
-    setShowFromCalendar(false)
-  }
+    setShowFromCalendar(false);
+  };
   const clearTo = () => {
     setTo(null);
-    setShowToCalendar(false)
-  }
+    setShowToCalendar(false);
+  };
 
   const handleFromChange = (value) => {
     error && setError('');
@@ -109,7 +110,14 @@ export default function LogsForm({setUserLog}) {
             From:
           </label>
           <div className="relative">
-            {from && <span className="absolute right-0 text-white top-2 cursor-pointer" onClick={clearFrom}>x</span>}
+            {from && (
+              <span
+                className="absolute right-0 text-white top-2 cursor-pointer"
+                onClick={clearFrom}
+              >
+                x
+              </span>
+            )}
             <input
               type="text"
               id="from"
@@ -136,7 +144,14 @@ export default function LogsForm({setUserLog}) {
             To:
           </label>
           <div className="relative">
-          {to && <span className="absolute right-0 text-white top-2 cursor-pointer" onClick={clearTo}>x</span>}
+            {to && (
+              <span
+                className="absolute right-0 text-white top-2 cursor-pointer"
+                onClick={clearTo}
+              >
+                x
+              </span>
+            )}
             <input
               type="text"
               id="to"
