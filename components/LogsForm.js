@@ -31,9 +31,7 @@ export default function LogsForm({setUserLog}) {
         params.append('limit', limit);
       }
 
-      const res = await fetch(API_URL + params.toString(), {
-        mode: 'cors',
-      });
+      const res = await fetch(API_URL + params.toString());
 
       if (res.status === 404) {
         setUserLog(null);
