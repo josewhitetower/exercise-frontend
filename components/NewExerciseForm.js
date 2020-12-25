@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import Calendar from 'react-calendar';
+import formattedDate from '../lib/formattedDate'
 export default function NewExerciseForm() {
   const [userId, setUserId] = useState('');
   const [description, setDescription] = useState('');
@@ -41,18 +42,6 @@ export default function NewExerciseForm() {
     }
   };
 
-  const formattedDate = (date) => {
-    const pad = (n) => {
-      return n < 10 ? '0' + n : n;
-    };
-    return (
-      date.getUTCFullYear() +
-      '-' +
-      pad(date.getMonth() + 1) +
-      '-' +
-      pad(date.getDate())
-    );
-  };
 
   const handleUserIdChange = (e) => {
     error && setError('');
@@ -151,7 +140,7 @@ export default function NewExerciseForm() {
           />
           {showCalendar && (
             <Calendar
-              className={`absolute ml-2 bg-green-500 rounded p-1 text-white`}
+              className={`absolute ml-2 bg-green-500 rounded p-1 text-white z-10`}
               value={date}
               onChange={handleDateChange}
               tileClassName={handleTileClassName}
