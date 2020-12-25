@@ -38,9 +38,7 @@ export default function LogsTable({user}) {
       if (duration) {
         updatedRow = {...log, duration};
       }
-      setDescription('');
-      setDate('');
-      setDuration('');
+
       updateRow(updatedRow);
     }
   };
@@ -59,17 +57,24 @@ export default function LogsTable({user}) {
         date: row.date,
       };
       // create new Exercise
-      await fetch(API_URL, {
+      const API_URL = 'http://localhost:4747/api/exercise/edit';
+      const res = await fetch(API_URL, {
         method: 'POST', // it should be PUT though
         body: JSON.stringify(data),
       });
+      if (!res.ok) {
+        console.log(res);
+        throw new Error(res.statusText)
+      }
     } catch (error) {
       setIsProcessing(false);
     } finally {
       setEditableRow(null);
       setIsProcessing(false);
+      setDescription('');
+      setDate('');
+      setDuration('');
     }
-
   };
   return (
     <table className="w-full mt-4 border-collapse">
