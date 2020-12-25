@@ -21,10 +21,10 @@ export default function LogsForm({setUserLog}) {
         params.append('userId', userId);
       }
       if (from) {
-        params.append('from', from);
+        params.append('from', formattedDate(from));
       }
       if (to) {
-        params.append('to', to);
+        params.append('to', formattedDate(to));
       }
       if (limit) {
         params.append('limit', limit);
