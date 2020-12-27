@@ -23,7 +23,7 @@ export default function Home() {
         </section>
         <section className="border-indigo-800 p-2 rounded-sm mt-2 border-t">
           <LogsForm setUserLog={setUserLog} />
-          {userLog && <LogsTable user={userLog} />}
+          {userLog && <LogsTable user={userLog} key={userLog.log}/>}
         </section>
       </main>
       <footer className="text-center py-4 text-base">

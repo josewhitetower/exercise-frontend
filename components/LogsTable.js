@@ -6,7 +6,9 @@ export default function LogsTable({user}) {
   const [description, setDescription] = useState('');
   const [duration, setDuration] = useState('');
   const [date, setDate] = useState('');
+  const [error, setError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [logs, setLogs] = useState(user.log);
 
   const onChange = (field, value) => {
     switch (field) {
@@ -43,12 +45,44 @@ export default function LogsTable({user}) {
     }
   };
 
+  const onDelete = (id) => {
+    const confirm = window.confirm('Are you sure');
+
+    if (confirm) {
+      deleteRow(id);
+    }
+  };
+
+  const deleteRow = async (id) => {
+    try {
+      setError('');
+      setIsProcessing(true);
+      const data = {
+        _id: id,
+      };
+      // create new Exercise
+      const API_URL =
+        'https://jt-exercise-tracker-mic.herokuapp.com/api/exercise/delete';
+      const res = await fetch(API_URL, {
+        method: 'POST', // it should be PUT though
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+      const newLogs = logs.filter((log) => log._id !== id);
+      setLogs(newLogs);
+    } catch (error) {
+      setIsProcessing(false);
+      setError('Error deleting row, please reload page');
+    } finally {
+      setEditableRow(null);
+    }
+  };
+
   const updateRow = async (row) => {
     try {
       setIsProcessing(true);
-      const myHeaders = new Headers();
-      myHeaders.append('Content-Type', 'application/json');
-      myHeaders.append('Access-Control-Allow-Origin', '*');
 
       const data = {
         _id: Number(row._id),
@@ -64,7 +98,6 @@ export default function LogsTable({user}) {
         body: JSON.stringify(data),
       });
       if (!res.ok) {
-        console.log(res);
         throw new Error(res.statusText);
       }
     } catch (error) {
@@ -81,6 +114,7 @@ export default function LogsTable({user}) {
     <table className="w-full mt-4 border-collapse">
       <caption className="font-semibold text-white mb-6">
         {user.username}'s Logs
+        {error && <p className="text-red-500">{error}</p>}
       </caption>
       <thead>
         <tr className="bg-green-500 border text-white border-gray-300">
@@ -91,8 +125,8 @@ export default function LogsTable({user}) {
         </tr>
       </thead>
       <tbody>
-        {user.log &&
-          user.log.map((log) => {
+        {logs &&
+          logs.map((log) => {
             return (
               <tr
                 className={`border-gray-300 border text-white ${
@@ -120,6 +154,7 @@ export default function LogsTable({user}) {
                 />
                 <ActionsCell
                   onEdit={onEdit}
+                  onDelete={onDelete}
                   log={log}
                   isEditing={log._id === editableRow}
                 />

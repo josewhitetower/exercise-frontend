@@ -1,4 +1,4 @@
-export default function ActionsCell({onEdit, log, isEditing}) {
+export default function ActionsCell({onEdit, log, isEditing, onDelete}) {
   const handleClick = () => {
     onEdit(log, !isEditing);
   };
@@ -19,7 +19,13 @@ export default function ActionsCell({onEdit, log, isEditing}) {
         >
           {isEditing ? '💾' : '📝'}
         </div>
-        <div tabIndex={0} className="mr-2 focus:outline-none focus:ring-2 focus:ring-green-400 cursor-pointer">⛔</div>
+        <div
+          tabIndex={0}
+          className="mr-2 focus:outline-none focus:ring-2 focus:ring-green-400 cursor-pointer"
+          onClick={() => onDelete(log._id)}
+        >
+          ⛔
+        </div>
       </div>
     </td>
   );
