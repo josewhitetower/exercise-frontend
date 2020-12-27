@@ -1,15 +1,11 @@
 import {useState} from 'react';
-import Calendar from 'react-calendar';
-import formattedDate from '../lib/formattedDate';
 export default function LogsForm({setUserLog}) {
   const [userId, setUserId] = useState('');
-  const [from, setFrom] = useState(null);
-  const [to, setTo] = useState(null);
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
   const [limit, setLimit] = useState('');
   const [error, setError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [showFromCalendar, setShowFromCalendar] = useState(false);
-  const [showToCalendar, setShowToCalendar] = useState(false);
 
   const handleSubmit = async (e) => {
     try {
@@ -22,10 +18,10 @@ export default function LogsForm({setUserLog}) {
         params.append('userId', userId);
       }
       if (from) {
-        params.append('from', formattedDate(from));
+        params.append('from', from);
       }
       if (to) {
-        params.append('to', formattedDate(to));
+        params.append('to', to);
       }
       if (limit) {
         params.append('limit', limit);
@@ -53,31 +49,14 @@ export default function LogsForm({setUserLog}) {
     setUserId(e.target.value);
   };
 
-  const handleTileClassName = (tile, date) => {
-    if (formattedDate(tile.date) === formattedDate(date)) {
-      return 'bg-indigo-900 rounded';
-    }
-  };
-
-  const clearFrom = () => {
-    setFrom(null);
-    setShowFromCalendar(false);
-  };
-  const clearTo = () => {
-    setTo(null);
-    setShowToCalendar(false);
-  };
-
-  const handleFromChange = (value) => {
+  const handleFromChange = (e) => {
     error && setError('');
-    setFrom(value);
-    setShowFromCalendar(false);
+    setFrom(e.target.value);
   };
 
-  const handleToChange = (value) => {
+  const handleToChange = (e) => {
     error && setError('');
-    setTo(value);
-    setShowToCalendar(false);
+    setTo(e.target.value);
   };
 
   const handleLimitChange = (e) => {
@@ -107,69 +86,31 @@ export default function LogsForm({setUserLog}) {
           <label htmlFor="from" className="flex-shrink-0 text-gray-300">
             From:
           </label>
-          <div className="relative">
-            {from && (
-              <span
-                className="absolute right-0 text-white top-2 cursor-pointer"
-                onClick={clearFrom}
-              >
-                x
-              </span>
-            )}
-            <input
-              type="text"
-              id="from"
-              name="from"
-              className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
-              autoComplete="off"
-              readOnly={true}
-              onFocus={() => setShowFromCalendar(true)}
-              value={formattedDate(from)}
-              placeholder="yyyy-mm-dd"
-            />
-            {showFromCalendar && (
-              <Calendar
-                className={`absolute ml-2 bg-green-500 rounded p-1 text-white`}
-                value={from}
-                onChange={handleFromChange}
-                tileClassName={(tile) => handleTileClassName(tile, from)}
-              />
-            )}
-          </div>
+          <input
+            type="date"
+            id="from"
+            name="from"
+            placeholder="yyyy-mm-dd"
+            pattern="\d{4}-\d{2}-\d{2}"
+            className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
+            value={from}
+            onChange={handleFromChange}
+          />
         </div>
         <div className="flex mt-2 items-center flex-grow mr-2">
           <label htmlFor="to" className="flex-shrink-0 text-gray-300">
             To:
           </label>
-          <div className="relative">
-            {to && (
-              <span
-                className="absolute right-0 text-white top-2 cursor-pointer"
-                onClick={clearTo}
-              >
-                x
-              </span>
-            )}
-            <input
-              type="text"
-              id="to"
-              name="to"
-              className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
-              autoComplete="off"
-              readOnly={true}
-              onFocus={() => setShowToCalendar(true)}
-              value={formattedDate(to)}
-              placeholder="yyyy-mm-dd"
-            />
-            {showToCalendar && (
-              <Calendar
-                className={`absolute ml-2 bg-green-500 rounded p-1 text-white`}
-                value={to}
-                onChange={handleToChange}
-                tileClassName={(tile) => handleTileClassName(tile, to)}
-              />
-            )}
-          </div>
+          <input
+            type="date"
+            id="to"
+            name="to"
+            pattern="\d{4}-\d{2}-\d{2}"
+            placeholder="yyyy-mm-dd"
+            className="p-2 ml-2 bg-indigo-900 border-b border-green-500 text-gray-300 cursor-pointer focus:cursor-text focus:border-green-200 focus:outline-none"
+            value={to}
+            onChange={handleToChange}
+          />
         </div>
         <div className="flex mt-2 items-center flex-grow mr-2">
           <label htmlFor="limit" className="flex-shrink-0 text-gray-300">
